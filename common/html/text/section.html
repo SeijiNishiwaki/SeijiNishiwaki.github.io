@@ -1,0 +1,99 @@
+<h3>
+	sectioning<br>
+	セクショニング
+</h3>
+
+<p>認識できないタグは　インラインになる
+	javascriptでは　createElement で　新しいタグを認識させられる</p>
+<pre><code>
+&lt;head&gt;
+  &lt;!--[if lt IE 9]&gt;
+    &lt;script src="html5shiv.js"&gt;&lt;/script&gt;
+    &lt;style&gt;&lt;!-- 認識されたタグの　ブロック要素であるものを　ブロック化する --&gt;
+      section,article,aside,nav,header,main,footer,address{
+        display:block;
+      }
+    &lt;/style&gt;
+  &lt;![endif]--&gt;
+&lt;/head&gt;
+</code></pre>
+
+
+<p>
+	セクショニング系は認識できないブラウザではインライン扱いとなってきけんなので
+	divのidでセクショニングしたものを HTML５でセクショニングタグでラップする感じ
+</p>
+
+<p>あとから付け足す時にも　こうすれば悪影響はすくないとおもう</p>
+
+<p>
+	セレクタは　タグで選択すると　構造が変わった時に対応できないので
+	セクションに id を振って　その中の必要な要素に クラスを振っていく
+</p>
+
+<pre><code>
+		&lt;article class="board"&gt;
+		
+		
+		
+			&lt;header&gt;
+				&lt;h2&gt;記事見出し&lt;/h2&gt;
+			&lt;/header&gt;
+		
+		
+		
+			&lt;!-&lt;main&gt;は使えない-&gt;
+		
+		
+		
+			&lt;section&gt;
+				&lt;p&gt;
+					記事の内容
+				&lt;/p&gt;
+			&lt;/section&gt;
+		
+		
+		
+			&lt;section&gt;
+				&lt;p&gt;
+					記事の内容
+				&lt;/p&gt;
+			&lt;/section&gt;
+		
+		
+		
+			&lt;footer&gt;
+				&lt;address&gt;
+					アドレステキスト
+				&lt;/address&gt;
+				&lt;p&gt;
+					&lt;small&gt;コピーライト&lt;/small&gt;
+				&lt;/p&gt;
+			&lt;/footer&gt;
+		
+		
+		
+		&lt;/article&gt;
+		
+		
+		
+		
+		
+		&lt;section&gt;
+			&lt;main&gt;
+		
+			&lt;/main&gt;
+		&lt;/section&gt;
+		
+		
+		
+		
+		
+		
+		
+		&lt;footer&gt;
+			&lt;address&gt;
+				ページ全体のアドレス
+			&lt;/address&gt;
+		&lt;/footer&gt;
+</code></pre>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>イベント</title>
+<link type="text/css" rel="stylesheet" href="../css/login.css" />
+
+</head>
+<body>
+<!--  エラーメッセージのリスト表示  -->
+<ul id="error_summary"></ul>
+
+<form id="fm">
+<div class="field">
+	<label for="isbn">メールアドレス</label>：
+	<input type="text" name="" value="" id="isbn" size="20" class="valid required regexp" data-pattern="[a-zA-Z0-9/-\\.]{1,15}@[a-zA-Z0-9/-\\.]{1,15}">
+
+</div>
+<div class="field">
+	<label for="title">名前</label>：
+	<input type="text" name="" value="" id="title" class="valid required" data-length="30" size="30" />
+
+</div>
+
+<div class="field">
+	<input type="submit" value="送信" />
+</div>
+</form>
+
+
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/login.js" ></script>
+</body>
+</html>

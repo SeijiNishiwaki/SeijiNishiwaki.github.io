@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>HTMLになって意味の変わったダグ</title>
+	<style type="text/css">
+		html,body{
+			height:100%;
+			margin:0;
+			padding:;
+		}
+
+		#text_wrapper{
+			/*border-top:1px solid #333;*/
+			background:#eee;
+			width:100%;
+			height:60%;
+			overflow: hidden;
+		}
+
+
+		#text_wrapper #header_text{}
+
+		#text_wrapper .section{
+			position:absolute;
+			/*border:1px solid ;*/
+			width:50%;
+		}
+
+
+
+
+
+
+
+
+
+
+		#text_wrapper dl,
+		#text_wrapper dt,
+		#text_wrapper dd{
+			/*border:1px solid ;*/
+			margin:0;
+			padding:0;
+			/*text-align: center;*/
+		}
+
+		#text_wrapper dl{
+			margin-top:-10px;
+		}
+
+
+		
+
+
+
+
+
+		#text_wrapper dt,#text_wrapper dd{
+			position:relative;
+			height:20px;
+			/*padding-top:20px;*/
+			
+		}
+		#text_wrapper dl{
+			position: absolute;
+			/*border:1px solid;*/
+			width:50px;
+		}
+		#text_wrapper dd{
+			width:180px;
+			top:-20px;
+			left:100%;
+		}
+		#text_wrapper #before_html{}
+		#text_wrapper #before_html{}
+		#text_wrapper #before_html{}
+		#text_wrapper #after_html{
+			left:50%;
+		}
+		
+
+
+	</style>
+</head>
+<body>
+
+
+	<div id="text_wrapper">
+
+
+
+
+
+
+		<div>
+			<h2>意味が変わったタグ</h2>
+			<p>HTML5になって意味の変わったタグ、使い方が変わったタグをまとめます</p>
+		</div>
+		
+
+
+
+		<div id="before_html" class="section">
+			<h3>以前</h3>
+			
+			<dl>
+				<dt>b</dt>
+				<dd>太字</dd>
+				<dt>i</dt>
+				<dd>イタリック体</dd>
+				<dt>em</dt>
+				<dd>強調</dd>
+				<dt>strong</dt>
+				<dd>強い強調</dd> 
+				<dt>small</dt>
+				<dd>小さくする</dd>
+				<dt>hr</dt>
+				<dd>水平線</dd>
+			</dl>
+		</div>
+		
+
+
+		
+		
+		<div id="after_html" class="section">
+			<h3>HTML5</h3>
+			
+			<dl>
+				<dt>b</dt>
+				<dd>ほかと区別(一般的に太字で書かれるテキスト),重要という意味は無い</dd>
+				<dt>i</dt>
+				<dd>ほかと区別(一般的にイタリックで書かれるテキスト),重要という意味はない</dd>
+				<dt>em</dt>
+				<dd>アクセントをつける、つける位置でニュアンスを変えられる</dd>
+				<dt>strong</dt>
+				<dd>強い強調、入れ子にできる</dd>
+				<dt>small</dt>
+				<dd>注釈（面責、警告、著作権）や細目</dd>
+				<dt>hr</dt>
+				<dd>セクション内での話題の区切り</dd>
+			</dl>
+		</div>
+
+
+
+
+
+
+	</div><!--load wrapper-->
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

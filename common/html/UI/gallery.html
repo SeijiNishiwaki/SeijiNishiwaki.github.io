@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>gallery_Controll_mouse</title>
+<!--
+上部にナビゲーターをつけて
+今見ている画像がどの位置か示したい
+
+読み込むファイルは　body の中で　<div id="load_wrapper"> でラップすること
+-->
+
+	<style type="text/css" id="gallery_controll_mouse">
+/*		html,body{
+			height:100%;
+			background:none;
+
+		}*/
+		body,img{ 
+			margin:0;
+			padding:0;
+
+		}
+		#load_wrapper{
+			border:1px solid red;
+			position:absolute;
+			width:100%;
+			
+
+		}
+		/*#load_wrapper #indicator{
+			position:absolute;
+			left:0%;
+			color:#333;
+			top:-5em;
+			border:1px solid #333;
+			width:16em;
+			height:4em;
+
+
+		}*/
+
+		#load_wrapper h1{
+			background:rgba(0,0,0,0.1);
+			text-align: center;
+			padding:20px 0px 20px 0px;
+		}
+
+		#load_wrapper #nav{
+			border:1px solid red;
+			margin-top:70px;
+		}
+		#load_wrapper #nav>ul{overflow: hidden; list-style:none;}
+
+		#load_wrapper #nav>ul>li{float:left; margin-right:10px;}
+
+		
+		#load_wrapper #box{
+			border-top:1px solid #333;
+			border-bottom:1px solid #333;
+			background:none;
+			/*position:absolute;*/
+			/*width:10000px;*/
+			height:500px;
+			/*margin:10 auto;*/
+			padding:0 10%;
+			overflow: hidden
+		}
+		#load_wrapper #box>div{
+			float:left;
+		}
+		#load_wrapper .border{
+			position:absolute;
+			width:100px;
+			height:100px;
+			border:5px solid #000;
+			margin-left:325px;
+			margin-top:-5px;
+		}
+	</style>
+</head>
+<body id="gallery">
+
+
+	<div id="load_wrapper">
+
+		<div id="page_title">
+			<h2>マウスの位置によって画像の位置を変更するギャラリー</h2>
+				
+				
+			<div id="indicator">
+					<div id="positionx">positionx : <span>0</span></div>
+					<div id="positiony">positiony : <span>0</span></div>
+					<div id="windowsize">windowsize : <span>0</span></div>
+			</div>
+		</div>
+	
+	
+	
+		
+		<div id="box">
+			<div><img src="../../image/cartrava01.jpg" height="500" width="900" alt=""></div>
+			<div><img src="../../image/cartrava02.jpg" height="500" width="630" alt=""></div>
+			<div><img src="../../image/cartrava03.jpg" height="500" width="760" alt=""></div>
+			<div><img src="../../image/cartrava04.jpg" height="500" width="630" alt=""></div>
+			<div><img src="../../image/cartrava05.jpg" height="500" width="740" alt=""></div>
+			<div><img src="../../image/cartrava06.jpg" height="500" width="750" alt=""></div>
+			<div><img src="../../image/cartrava07.jpg" height="500" width="390" alt=""></div>
+			<div><img src="../../image/cartrava08.jpg" height="500" width="620" alt=""></div>
+			<div><img src="../../image/cartrava09.jpg" height="500" width="680" alt=""></div>
+			<div><img src="../../image/cartrava10.jpg" height="500" width="390" alt=""></div>
+			<div><img src="../../image/cartrava11.jpg" height="500" width="390" alt=""></div>
+			<div><img src="../../image/cartrava12.jpg" height="500" width="390" alt=""></div>
+		</div>
+		
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script src="../../js/jquery-1.11.1.min.js"></script>
+	<script>
+$(function(){
+
+
+
+//変数宣言	
+var positionx;
+var positiony;
+var wrapper_margin;
+
+
+
+
+
+
+
+/*---------------------------------------*/
+	//#galleryの幅を自動で設定
+/*---------------------------------------*/
+
+
+			//イメージ用から幅を計算して適用する
+
+					var gallery_width = 0;
+					$('#load_wrapper #box img').each(function(){
+						gallery_width = (gallery_width + parseInt($(this).attr('width')));
+					}); 
+
+
+
+
+			//幅とセンタリングマージンの適用
+
+					$('#load_wrapper #box').css({
+						width:gallery_width+"px",
+						marginLeft:"-"+(gallery_width/2)+"px",
+					});
+
+
+
+
+
+
+
+
+/*---------------------------------------*/
+	//windowの幅を取得　表示
+/*---------------------------------------*/
+
+
+			//ウィンドウ幅を取得
+
+					var windowsize = window.innerWidth;
+			
+			//indicatorに書き出し
+
+					$('#windowsize>span').text(windowsize);
+					
+					$(window).resize(function(){
+						var windowsize = window.innerWidth;
+						$('#windowsize>span').text(windowsize);
+					});
+
+
+
+
+
+/*---------------------------------------*/
+	//ギャラリーの設定
+/*---------------------------------------*/
+
+
+//バグ　読み込みじゃないと動かない
+			// stageのmargin-left の値を取得
+
+			if($('#wrapper')){
+				wrapper_margin = $('#wrapper').css('margin-left').match(new RegExp('[0-9]{0,9}')).toString();
+				parseInt(wrapper_margin);
+			}
+
+
+
+
+
+			//画像を触ると動く
+
+			$("#load_wrapper #box").mousemove(function(e) {
+
+
+
+				//必要な情報を取得
+
+
+					//ウィンドウの幅
+						var windowsize = window.innerWidth;
+
+					//マウスの座標
+						var positionx = e.pageX;
+						var positiony = e.pageY;
+
+
+
+					//pageXの値の基準を　window幅の中心に持っていく
+					//画面の中心から左に行くと　-の値になるように変換
+						var centerx = positionx-(windowsize/2);
+
+
+
+					//pageXの位置を相対的に取得
+					//windowsizeを100分割した幅（1%）が いくつあると centerxになるか考える
+						var persentx = -(centerx / (windowsize/100));
+
+
+
+
+					//persentX を画像の割合に変換する
+
+					//座標がwindowに対して左から 何%の位置にあるか
+
+						var n = ( positionx / windowsize )*100;
+
+			//boxがwindowsizeをはみ出していることが前提
+			//はみ出した文の1% を 画面の位置の相対的な位置 n でかける
+			// つまり　画面の 相対的な位置と はみ出した文の相対的な位置を　ひも付けている
+
+			var s = (   ( windowsize-$('#box').outerWidth() )/100   )*n-wrapper_margin;
+
+
+
+
+			//indicatorに書き出し
+			$('#positionx>span').text(positionx);
+			$('#positiony>span').text(positiony);
+
+
+
+			setTimeout(function(){$('#box').css({
+				marginLeft:s,
+			});},150);
+			
+		});
+
+
+});
+
+	</script>
+</body>
+</html>

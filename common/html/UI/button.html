@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>css3_button</title>
+</head>
+<style type="text/css">
+	#load_wrapper .load_stage{
+			position:absolute;
+			/*border:1px solid #333;*/
+			background:none;
+			width:100%;
+			height:100%;
+		}
+	
+	#load_wrapper .side{
+		/*border:1px solid;*/
+		background:rgba(255,255,255,0.8);
+		position:absolute;
+		top:50%;
+		width:100%;
+		height:300px;
+		margin-top:-150px;
+	}
+
+/*	#load_wrapper .side_start{
+		background:#afa;
+		position:absolute;
+		top:50%;
+		width:100%;
+		height:300px;
+		margin-top:-150px;
+	}*/
+
+/*	#load_wrapper .load_stage1{
+		top:0%;
+	}
+
+
+	#load_wrapper .load_stage2{
+		top:100%;
+	}
+
+
+	#load_wrapper .load_stage3{
+		top:200%;
+	}*/
+
+
+/*
+	#load_wrapper .load_stage div{
+		width:100%;
+		height:100%;
+	}*/
+</style>
+
+<style type="text/css">
+
+
+/*---------------------------------------*
+		共通項目
+/*---------------------------------------*/
+
+	#load_wrapper .load_stage ul{
+		/*border:1px solid;*/
+		position: relative;
+		width:100%;
+		height:100%;
+		margin:0px 0px 0px 0px;
+		padding:0;
+		list-style:none;
+	}
+
+	
+	#load_wrapper .load_stage li{
+		/*border:1px solid red;*/
+		position:absolute;
+		top:50%;
+		left:50%;
+		width:200px;
+		height:80px;
+		margin-top:-40px;
+		margin-left:-100px;
+	}
+
+
+	#load_wrapper .load_stage li a{
+		position: relative;
+		display:block;
+		background:#bbeeee;
+		color:#333333;
+		text-decoration:none;
+		text-align:center;
+		width:100%;
+		height:100%;
+		border:1px solid #33FFFF;
+		padding:3px 0px 3px 0px;
+		border-radius:8px;
+
+		font-size:14px;
+		line-height:5;
+	}
+
+	#load_wrapper a:hover{
+		color:#333333;
+		background:#33FFFF;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* サイド２　ーーーーゆっくり大きくーーーーーーーーーーーーー */
+
+
+	.side1 li a{
+
+		transform:scale(1.0);
+		transition: all 1s ease
+	}
+	.side1 li a:hover{
+		transform:scale(1.2);
+	}
+
+
+
+
+
+
+
+/*　サイド３　ーーーーーーーTV画面が消えるような　エフェクトーーーーー*/
+
+
+
+
+	.side2 li a{
+	
+		transform:scale(1);
+		transition: all 0.5s ease;
+	}
+	.side2 li a:hover{
+
+		transform:scale(3,0);
+	}
+
+
+
+
+
+/*　サイド４　ーーーーーー  傾き  ーーーーーーーーーー*/
+
+
+
+
+	.side3 li a{
+
+		transform:skew(50deg);
+		transition: all 1s ease;
+	}
+
+
+	.side3 li a:hover{
+
+		transform:skew(0deg);
+	}
+
+
+
+
+
+
+
+
+
+
+</style>
+<body>
+	
+
+
+		<div id="load_wrapper" id="css3_button">
+
+
+
+			<div id="page_title">
+
+				<h2>CSS3_ボタン</h2>
+				<div><span>scale(1,2)</span></div>
+				<div><span>scale(3,0)</span></div>
+				<div><span>skew(50deg)</span></div>
+				<div><span></span></div>
+
+			</div>
+
+
+
+
+			
+
+
+
+
+			<div id="load_stage">
+
+
+
+				<div class="load_stage1 load_stage">
+				
+					<div class="side1 side">
+
+						<div id="load_stage_text">
+								<h3>scale</h3>
+						</div>
+
+
+						<ul>
+							<li><a href="#">ボタン1</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+				<div class="load_stage2 load_stage">
+					<div class="side2 side">
+
+						<div id="load_stage_text">
+								<h3>scale_custom</h3>
+						</div>
+
+						<ul>
+							<li><a href="#">ボタン1</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+				<div class="load_stage3 load_stage">
+					<div class="side3 side">
+
+						<div id="load_stage_text">
+								<h3>skew</h3>
+						</div>
+
+						<ul>
+							<li><a href="#">ボタン1</a></li>
+						</ul>
+					</div>
+				</div>
+
+
+
+			</div>
+
+
+
+			<div id="link_area">
+				<div>
+					<p id="load1">scale</p>
+				</div>
+				<div>
+					<p id="load2">scale2</p>
+				</div>
+				<div>
+					<p id="load3">skew</p>
+				</div>
+			</div>
+
+		</div><!--load_wrapper-->
+
+
+<script src="../../js/jquery-1.11.1.min.js"></script>
+<script src="../../js/-prefix-free.js"></script>
+<script>
+	
+
+	// $('#load2').click(function(e){
+	// 	alert();
+	// });
+
+
+	// $('#load3').click(function(e){
+	// 	alert();
+	// });
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>3Drotation</title>
+	<style type="text/css">
+	#stage{
+		perspective:1500px;
+
+		position:absolute;
+		top:50%;
+		left:50%;
+		width:500px;
+		height:500px;
+		/*border:1px solid;*/
+	}
+	.sphere{
+		transform-style:preserve-3d;
+
+		position:absolute;
+		top:50%;
+		left:50%;
+		width:100%;
+		height:100%;
+		/*border-radius:50px;*/
+		/*border:1px solid;*/
+		animation:circle 5s linear 0s infinite;
+	}
+	#sphere1{animation:circle 5s linear 0s infinite;}
+	#sphere2{animation:circle2 5s linear 0s infinite;}
+	.circle{
+		position:absolute;
+		top:50%;
+		left:50%;
+		width:200px;
+		height:200px;
+		border:1px solid #aaa;
+	}
+/*	#circle1{
+		transform:rotateX(80deg) rotateY(20deg);
+	}*/
+	@keyframes circle{
+		0%{ transform:rotateY(0deg) rotateX(45deg); }
+		100%{ transform:rotateY(360deg) rotateX(405deg); }
+	}
+	@keyframes circle2{
+		0%{ transform:rotateY(0deg) rotateX(-45deg); }
+		100%{ transform:rotateY(360deg) rotateX(-405deg); }
+	}
+	span{
+		visibility:hidden;
+	}
+	</style>
+</head>
+<body>
+<div id="stage">
+	<div class="sphere" id="sphere1">
+		<div class="circle1 circle"><span>0</span></div>
+		<div class="circle2 circle"><span>0</span></div>
+		<div class="circle3 circle"><span>0</span></div>
+		<div class="circle4 circle"><span>0</span></div>
+		<div class="circle5 circle"><span>0</span></div>
+		<div class="circle6 circle"><span>0</span></div>
+		<div class="circle7 circle"><span>0</span></div>
+		<div class="circle8 circle"><span>0</span></div>
+		<div class="circle9 circle"><span>0</span></div>
+		<div class="circle10 circle"><span>0</span></div>
+		
+	</div>
+	<div class="sphere" id="sphere2">
+		<div class="circle1 circle"><span>0</span></div>
+		<div class="circle2 circle"><span>0</span></div>
+		<div class="circle3 circle"><span>0</span></div>
+		<div class="circle4 circle"><span>0</span></div>
+		<div class="circle5 circle"><span>0</span></div>
+		<div class="circle6 circle"><span>0</span></div>
+		<div class="circle7 circle"><span>0</span></div>
+		<div class="circle8 circle"><span>0</span></div>
+		<div class="circle9 circle"><span>0</span></div>
+		<div class="circle10 circle"><span>0</span></div>
+	</div>
+</div>
+	<script src="../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../js/-prefix-free.js"></script>
+	<script>
+		$(function(){
+
+			var stgw = -($('#stage').width())/2;
+			var stgh = -($('#stage').height())/2;
+			$('#stage').css({marginLeft:stgw,marginTop:stgh});
+
+			var sphw = -($('.sphere').width())/2;
+			var sphh = -($('.sphere').height())/2;
+			$('.sphere').css({marginLeft:sphw,marginTop:sphh});
+
+			var cirw = -($('.circle').width())/2;
+			var cirh = -($('.circle').height())/2;
+
+			$('.circle').css({
+				marginLeft:cirw,
+				marginTop:cirh,
+				borderRadius:-cirh,
+			});
+
+
+		var cl = $('.circle').length;
+		var clhalf = Math.ceil(cl/2);
+		var cPI = 360/cl;
+		for(i=0; i<=cl; i++){
+			$('style').append(
+				".circle"+ (i+1) +"{\n"+
+				" transform:rotateY("+Math.round(cPI*i)+"deg) \n"+
+				" rotateX(80deg); \n"+
+				"}"
+			);
+		}
+
+
+
+		});
+	</script>
+</body>
+</html>

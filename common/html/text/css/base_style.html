@@ -1,0 +1,91 @@
+<pre><code>
+
+クリアー ーーーーーーーーーーーー
+
+{
+	margin:0;
+	padding:0;
+}
+{
+	list-style-type:none;
+}
+img{
+	vertical-align:bottom;
+}
+
+
+
+[! IE 対策 ]ーーーーーーーーーー
+{
+	zoom:1;
+}
+
+
+
+センタリングーーーーーーーーーーー
+	autoスタイルーー
+{
+	/*width:個別に設定すること*/
+	margin:0 auto;
+}
+
+	positionスタイルーー
+{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-50%;
+	/*高さは個別に設定するしかない*/
+}
+
+
+
+3dスタイルーーーーーーーーーーーー
+{
+	perspective:1000px;
+}
+{
+	transform-style:preserve-3d;
+}
+
+
+
+エリアスタイルーーーーーーーーーー
+ルートエリア
+{
+	width:自由に設定;
+	height:自由に設定;
+	/*border:1px solid;*/
+}
+//これ以下%指定, 高さはautoと固定を状況に応じて使い分ける
+{
+	background:一括で設定する場合;
+	border:1px solid; 同上
+	width:100%;
+	height:100%;
+}
+
+
+テキストエリアスタイルーーーーーーー
+{
+	background-color:#fff;
+	background-color:rgba(0,0,0,0.3);
+	width:80%;
+	height:auto;
+}
+
+
+p{
+	margin:0.8em 0.8em 0.8em 0.8em;
+	width:auto;
+	height:auto;
+	line-height:20;
+}
+
+
+.red{
+	color:red;
+}
+//など　色を設定する
+//色を変えたいところにそのクラスをつける
+</code></pre>

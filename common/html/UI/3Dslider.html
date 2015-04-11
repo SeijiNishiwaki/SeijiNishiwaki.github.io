@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>3Dslider</title>
+	<style id="3Dslider_style">
+
+		li,ul{
+			margin:0;
+			padding:0;
+		}
+
+
+
+/*---------------------------------------*
+		共通項目
+/*---------------------------------------*/
+
+
+		#load_wrapper{
+			/*position:absolute;*/
+			width:100%;
+		}
+
+		#load_wrapper #load_stage{
+
+			position:absolute;
+			top:50%;
+			left:50%;
+			background:rgba(255,255,255,0.8);
+			
+			
+			width:100%;
+			margin-left:-50%;
+			height:300px;
+			margin-top:-150px;
+		}
+
+
+/*---------------------------------------*
+		3D化する css 一括指定
+/*---------------------------------------*/
+
+
+
+		load_wrapper,
+		#three_slider,
+		#three_slider_stage,
+		#three_slider li,
+		#Y{
+			transform-style:preserve-3d;
+		}
+
+
+
+
+
+
+/*---------------------------------------*
+		3Dslider　の css
+/*---------------------------------------*/
+
+
+
+		#load_wrapper #load_stage{
+
+			perspective:800px;
+		}
+
+
+		#load_wrapper #Y{
+
+			position:absolute;
+			z-index: 0;
+			
+			left:50%;
+
+			width:0px;
+			height:100%;
+		}
+
+
+
+		#load_wrapper #three_slider{
+
+			position:absolute;
+			z-index:0;
+
+			width:100%;
+			height:100%;
+		}
+
+
+
+		#load_wrapper #three_slider li{
+
+			position:absolute;
+			top:50%;
+			left:50%;
+
+			background:rgba(0,0,0,0.2);
+			border:1px solid #333;
+
+			width:100px;
+			margin-left:-50px;
+			height:100px;
+			margin-top:-50px;
+
+			list-style: none;
+		}
+
+
+
+
+
+
+
+/*---------------------------------------*
+		操作ボタン　の css
+/*---------------------------------------*/
+
+
+		#load_wrapper #three_slider_button{
+
+			position:absolute;
+			z-index:9999;
+			bottom:0;
+			left:50%;
+
+			width:50%;
+			margin-left:-25%;
+
+			margin-top:-5em;
+		}
+
+
+
+		#load_wrapper #three_slider_next,#three_slider_prev{
+			position:absolute;
+			z-index:9999;
+
+			background:rgba(0,0,0,0.6);
+			border:1px solid #333;
+
+			width:25%;
+			height:3em;
+			margin-top:-3em;
+
+			text-align: center;
+			line-height: 3em;
+		}
+
+
+
+		#load_wrapper #three_slider_next{
+			position:absolute;
+			z-index: 9999;
+			right:0;
+		}
+
+		#load_wrapper #three_slider_prev{
+			position: absolute;
+			z-index: 9999;
+			left: 0;
+		}
+
+		#load_wrapper #three_slider_next:hover{
+			background:#333;
+			color:#eee;
+		}
+
+		#load_wrapper #three_slider_prev:hover{
+			background:#333;
+			color:#eee;
+		}
+
+
+
+	</style>
+</head>
+
+
+<body>
+
+
+
+	<div id="load_wrapper">
+
+
+
+
+
+		<div id="page_title">
+			<h2>3Dslider</h2>
+			
+			<div id="indicator">
+			
+				<div id="count">現在のカウント<span>0</span>:count</div>
+				<div id="before_count">前のカウント<span>0</span>:before_count</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<div id="load_stage">
+
+
+
+			<div id="Y"><!--全体を回転するdiv-->
+
+				<div id="three_slider">
+					<ul>
+						<li class="three_panel1">01</li>
+						<li class="three_panel2">02</li>
+						<li class="three_panel3">03</li>
+						<li class="three_panel4">04</li>
+						<li class="three_panel5">05</li>
+						<li class="three_panel6">06</li>
+						<li class="three_panel7">07</li>
+						<li class="three_panel8">08</li>
+						<li class="three_panel9">09</li>
+						<li class="three_panel10">10</li>
+					</ul>
+				</div>
+			</div>
+
+
+
+
+			<div id="three_slider_button">
+				<div id="three_slider_prev">prev</div>
+				<div id="three_slider_next">next</div>
+			</div>
+
+
+		</div>
+
+
+
+
+
+			
+		
+	</div><!--load_wrapper-->
+
+
+
+	<script src="../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../js/-prefix-free.js"></script>
+	<script>
+
+//全体のカウント 1~l　までカウントする
+	var count = 1;
+
+
+	var l_count = 1;
+	var before_count;
+
+
+
+	//要素の数
+	var l = $('#three_slider li').length;
+	//角度シータ
+	var theta = 360/l;
+
+
+
+
+	//スタイルを書き出す
+	for(i=1; i<=l; i++){
+		$('#3Dslider_style').append(
+
+			'#three_slider .three_panel'+i+'{\n'+
+			'	transform:rotateY('+theta*(i-1)+'deg) translateZ(200px);\n'+
+			'}\n'+
+			'\n'+
+
+			'.rotY_prev'+i+'{\n'+
+			'	animation:rotY_prev'+i+' 0.5s ease;\n'+
+			'	transform:rotateY('+theta*(i-1)+'deg) translateZ(0px);\n'+
+			'}\n'+
+			'@keyframes rotY_prev'+i+'{\n'+
+			'	0%{transform:rotateY('+((theta*(i-1))-theta)+'deg) translateZ(0px);}\n'+
+			'	100%{transform:rotateY('+theta*(i-1)+'deg) translateZ(0px);}\n'+
+			'}\n'+
+			'\n'+
+
+			'.rotY_next'+i+'{\n'+
+			'	animation:rotY_next'+i+' 0.5s ease;\n'+
+			'	transform:rotateY('+theta*(i-1)+'deg) translateZ(0px);\n'+
+			'}\n'+
+			'@keyframes rotY_next'+i+'{\n'+
+			'	100%{transform:rotateY('+theta*(i-1)+'deg) translateZ(0px);}\n'+
+			'	0%{transform:rotateY('+((theta*(i-1))+theta)+'deg) translateZ(0px);}\n'+
+			'}\n'+
+			'\n'+
+		'');
+	}
+
+
+	prefixFree();
+
+
+
+
+
+	$('#three_slider_prev').click(function(){
+		//nextクラスを削除
+		for(rm=1; rm<=l; rm++){
+			$('#Y').removeClass('rotY_next'+rm);
+		}
+
+
+		//クリックしたとき＋１する	初期値は1なので　2 からスタート
+		count++;
+
+		//countが増えすぎたらリセット
+		if(count>l) count=1;
+
+		//一つ前のカウントを保存
+		before_count = (count+(l-2))%l+1;
+
+
+		//indicatorに書き出しチェック
+		$('#count span').text(count);
+		$('#before_count span').text(before_count);
+
+
+		//カウントに対応した角度を割り振ったクラスを取り付ける
+		$('#Y').removeClass('rotY_prev'+before_count)
+				.addClass('rotY_prev'+count);
+		
+	});
+
+
+
+
+
+
+	$('#three_slider_next').click(function(){
+		//prevクラスを削除
+		for(rm=1; rm<=l; rm++){
+			$('#Y').removeClass('rotY_prev'+rm);
+		}
+
+		//クリックしたとき＋１する	初期値は1なので　2 からスタート
+		count--;
+
+		//countが増えすぎたらリセット
+		if(count<=0) count=l;
+
+		//一つ前のカウントを保存
+		before_count = count%l+1;
+
+
+		//indicatorに書き出しチェック
+		$('#count span').text(count);
+		$('#before_count span').text(before_count);
+
+
+		//カウントに対応した角度を割り振ったクラスを取り付ける
+		$('#Y').removeClass('rotY_next'+before_count)
+				.addClass('rotY_next'+count);
+
+
+	});
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+スタイル
+
+one.css 		.hiden .none .white .black .a_white .a_black
+
+clear.css 		html body
+
+
+
+ーーーーーーscript関係
+
+
+stage_style						
+
+3Dパネル
+3D_panel_base					> panel_dagault_style
+3D_panel_animation 				> panel_rotY_style
+control_rotX 					> panel_rotX_style
+select_animation 				> panel_select_animation
+
+
+
+スフィアー
+default_base_style				> sphere_default_style
+default_animation_style 		> sphere_default_animation
+effect_animation_style 			> sphere_select_animation
+default_transform_style 		> ?
+sphere_effect_style 			> PI/l_style ? 
+
+
+
+effect_in_style 				> sphere_effect_in
+after_effect_style 				> sphere_after_effect
+effect_out_style 				> sphere_effect_out
+
+
+
+
+
+
+ポジションと階層//階層が深くなると　何が基準かわかりづらい　
+
+$は連番を示す
+
+
+
+ヘッダー
+
+	#g_nav
+		h1
+		ul
+			li
+
+	#header_text
+		p
+
+ラッパー
+
+	#wrapper
+		#stage
+
+
+		パネル
+			#over_ray
+				#controll .controll
+					#circle
+						.panel panel$1~l
+							div
+								a
+									UIコンテンツ
+
+		スフィア
+			#sphere_nav
+				#sphere_space .sphere_space
+
+					#sphere1 .sphere1 sphere
+						ul
+							.circle circle$1~l
+								textY
+									textX
+										text
+											ナビゲーション
+
+					#sphere2 .sphere2 sphere
+						ul
+							.circle circle$1~l
+								textY
+									textX
+										text
+											ナビゲーション
+
+
+		#text_viewer (.none)
+
+			#text1 .text_list (.none)
+				ul
+					li
+						a
+
+			#text2 .text_list (.none)
+				ul
+					li
+						a
+
+
+
+
+
+
+
+
+

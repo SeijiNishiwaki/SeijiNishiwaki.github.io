@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>サークルメニュー</title>
+
+	<style type="text/css">
+	
+		#load_wrapper #stage{	
+			border:1px solid;
+			margin:0;
+			padding:0;
+			width:100%;
+			height:100%;
+			position:absolute;
+			list-style:none;
+		}
+		#load_wrapper #stage>li{
+			position:absolute;
+			z-index:10;
+
+			border:1px solid #333;
+
+			width:20px;
+			margin-left:-10px;
+			height:20px;
+			margin-top:-10px;
+
+			color:#333;
+			text-align:center;
+			line-height: 1em;
+			
+			/*bottom:0;*/
+		}
+	</style>
+
+</head>
+
+
+
+<body>
+
+
+
+
+<div id="load_wrapper" id="circle_layout">
+
+	<div id="page_title">
+	<h2>circle&nbsp;layout</h2>
+	<div><span>X座標&nbsp;:&nbsp;r*Math.cos(Math.PI/180*(deg*element_count))</span></div>
+	<div><span>X座標&nbsp;:&nbsp;r*Math.sin(Math.PI/180*(deg*element_count))</span></div>
+	</div>
+
+	<div id="load_stage">
+		<ul id="stage">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+			<li>11</li>
+			<li>12</li>
+			<li>13</li>
+			<li>14</li>
+			<li>15</li>
+			<li>16</li>
+			<li>17</li>
+			<li>18</li>
+			<li>19</li>
+			<li>20</li>
+		</ul>
+	</div>
+</div>
+
+
+
+	<script src="../../js/jquery-1.11.1.min.js"></script>
+	<script>
+// 		$(function(){
+		
+
+
+
+
+// /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+// 			//必要な値を用意する
+// /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+// 			//カウント用変数
+// 			var circle_count = 1;
+
+
+// 			//要素の数
+// 			var l = $('#load_wrapper li').length;
+
+
+// 			//円を要素の数で割った角度
+// 			var deg = 360/l;
+
+
+// 			//円の半径
+// 			var r = 200;
+
+
+// 			//ステージの取得
+// 			var stage = $('#stage');
+
+
+// 			//ステージの 幅 / 高さ を取得
+// 			var stageWidth = stage.outerWidth();
+// 			var stageHeight = stage.outerHeight();
+
+
+// 			//幅をpx指定しても自動で割り出してセンタリングする
+// 			stage.css({
+// 				marginLeft:-stageWidth/2,	//ステージの幅から中心を割り出して　基準点をずらす
+// 				left:'50%'					//基準点をウィンドウの中心に持っていく
+// 			})
+
+
+
+
+
+
+
+
+// /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+// 			//スタート位置をランダムに設定
+// /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+// 			//要素の数だけ処理 01 ランダムに配置
+// 			$('#load_wrapper li').each(function(){
+
+
+
+
+// 					//初期位置のをランダムで取得
+// 					var posrnd = Math.round(Math.random()*stageWidth*10)/10;
+// 					var rotrnd = Math.round(Math.random()*360);//?
+
+
+
+// 					$(this).css({
+
+
+// 						//stageの範囲内でランダムに配置
+// 						left:posrnd,
+// 						bottom:posrnd,
+
+// 						//最初の大きさ
+// 						width:'80px',
+// 						height:'80px',
+
+
+
+
+// 					});//css
+// 			});//each
+
+
+
+
+
+
+
+
+// ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+// 			//スタート位置をランダムに設定
+// /*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+
+// 			//要素の数だけ処理 02 円形に再配置
+			
+// 			$('#load_wrapper li').each(function(){
+
+
+// 					$(this).animate({
+
+
+// 						position:'absolute',
+
+
+
+// 						// ┌────────────────────────────────────────────────────────────────────┐ \\
+// 						// │	cosθ は x座標 を示す		//sinθ は y座標 を示す  			        │ \\
+// 						// ├────────────────────────────────────────────────────────────────────┤ \\
+// 						// │    π / 180 * deg　は　角度をradian単位に変換している                    │ \\
+// 						// └────────────────────────────────────────────────────────────────────┘ \\
+						
+
+
+
+// 						/* x座標 */
+// 						left: 	r*Math.cos(Math.PI/180*(deg*circle_count))
+// 								+(stageWidth/2)
+// 								,
+
+// 																		//+(stageWidth/2)にすることで円全体を右上にずらす
+
+
+
+
+// 						/* y座標 */
+// 						bottom: r*Math.sin(Math.PI/180*(deg*circle_count))
+// 								+(stageHeight/4)
+// 								,
+
+// 																		//r(半径)の数値を変更することで楕円にすることも可能
+
+
+// 						//アニメーション後の大きさ
+// 						width:'20px',
+// 						height:'20px',
+
+
+
+// 				},2000);//animate
+
+
+
+
+// 			circle_count++;
+
+// 			});//each
+				
+
+
+
+// 		});//おわり
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

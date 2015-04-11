@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+
+
+<!-- キャッシュさせないようにしたいが上手くいかない -->
+<!-- 	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0"> -->
+
+
+
+	<title>3Drotation</title>
+
+
+
+
+	<link rel="stylesheet" type="text/css" href="common/css/one.css">
+	<link rel="stylesheet" href="common/css/clear.css"><!--最初に読み込むこと-->
+	<link rel="stylesheet" href="common/css/base_style.css">
+	<link rel="stylesheet" href="common/css/noScript.css">
+	<link rel="stylesheet" href="common/css/load_page.css">
+	<link rel="stylesheet" href="common/css/text_viewer_style.css">
+
+
+
+	<style type="text/css">
+		body,html{
+			font-family: "helvetica","メイリオ","meiryo","sans-serif";
+			padding:0;
+			margin:0;
+		}
+		#header_text{
+			text-align: center;
+		}
+
+		#controll .panel a{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+			color:#000;
+			
+		}
+		#controll .panel .panel_title{
+			font-size: 3em;
+			display:block;
+			border:1px solid;
+			width:300%;
+			margin-top:50%;
+			padding:0 8% 0 8%;
+		}
+	</style>
+
+
+
+
+	<!--以下javascript有効時のスタイルが読み込まれます-->
+</head>
+<body>
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+						ミニマップ
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+<!-- ーーーーーーーーーーーーーー 
+
+
+　ヘッダー
+	#g_nav
+	#header_text
+　ラッパー
+	#stage
+		パネル型ナビゲーション
+		スフィア型ナビゲーション
+			テキストビューア
+　フッター
+
+
+
+ーーーーーーーーーーーーーーー -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+							ヘッダー
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーー 
+　グローバルナビゲーション
+ーーーーーーーーーーーーーーー -->
+
+
+			<div id="g_nav">
+			
+				<h1>ITEC</h1>
+				
+				<ul>
+					<li><a href="common/html/login.html"><span><a href="common/html/login.html">ログイン</a></span></a></li>
+					<li><a href="about.html"></a><span><a href="index.html">サイトについて</a></span></li>
+				</ul>
+			
+			</div>
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーー 
+　グローバルナビゲーション
+ーーーーーーーーーーーーーーー -->
+
+
+			<div id="header_text">
+					<p>ウェブデザインを勉強していく中でできたいろいろなものをここで紹介しています</p>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+		wrapper width980px 以下に成ると scriptでwindow.innerwideに書き換え
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+<div id="wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー 
+　 			3Dのエリア　persepective 1000px
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+	<!-- <div id="load"></div> -->
+
+	<div id="stage">
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー 
+　パネル型ナビゲーション
+
+階層
+		#over_ray 								<div>
+			#controll .controll 				<div>
+				#circle 						<ul>
+					.panel panel「連番」 			<li>
+						<div> 					<div>
+							<a> 				<a>
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+
+
+
+		<div id="over_ray"><!-- 選択時にスフィアをクリックできないようにする -->
+
+			<div id="controll" class="controll">
+
+				<ul id="circle">
+					<li class="panel1 panel"><div><a href="common/html/UI/slider.html"><span class="panel_title">スライダー</span></a></div></li>
+					<li class="panel2 panel"><div><a href="common/html/UI/button.html"><span class="panel_title">色々なボタン</span></a></div></li>
+					<li class="panel3 panel"><div><a href="common/html/UI/gallery.html"><span class="panel_title">ギャラリー</span></a></div></li>
+					<li class="panel4 panel"><div><a href="common/html/UI/3Dslider.html"><span class="panel_title">３Dスライダー</span></a></div></li>
+					<li class="panel5 panel"><div><a href="common/html/UI/circle.html"><span class="panel_title">円形レイアウト</span></a></div></li>
+					<li class="panel6 panel"><div><a href="common/html/UI/sphere.html"><span class="panel_title">球体をつくる</span></a></div></li>
+					<li class="panel3 panel"><div><a href="common/html/UI/panel.html">パネルメニュー</a></div></li>
+					<li class="panel4 panel"><div><a href="common/html/UI/list.html">リストメニュー</a></div></li>
+					<li class="panel8 panel"><div><a href="common/html/UI/template.html">テンプレート</a></div></li>
+				増えても対応できる
+					<li class="panel10 panel"><div><a href="common/html/UI/slider.html">スライダー</a></div></li>
+					<li class="panel11 panel"><div><a href="common/html/UI/button.html">色々なボタン</a></div></li>
+					<li class="panel12 panel"><div><a href="common/html/UI/panel.html">パネルメニュー</a></div></li>
+					<li class="panel13 panel"><div><a href="common/html/UI/list.html">リストメニュー</a></div></li>
+					<li class="panel14 panel"><div><a href="common/html/UI/gallery.html">ギャラリー</a></div></li>
+					<li class="panel15 panel"><div><a href="common/html/UI/3Dslider.html">３Dスライダー</a></div></li>
+					<li class="panel16 panel"><div><a href="common/html/UI/circle.html">円形レイアウト</a></div></li>
+					<li class="panel17 panel"><div><a href="common/html/UI/template.html">テンプレート</a></div></li>
+					<li class="panel18 panel"><div><a href="common/html/UI/sphere.html">球体をつくる</a></div></li>
+				</ul>
+
+			</div>
+
+		</div><!--over_lay-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーー 
+　scriptが切れてる時に表示
+ーーーーーーーーーーーーーーー -->
+
+		<hr class="noscript">
+
+
+		<div id="memo">
+
+		<h2 class="noscript">
+			<span class="noscript">MEMO</span>
+		</h2>
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーー 
+　スフィア型ナビゲーション
+
+階層
+
+	#sphere_nav
+		#sphere_space .sphere_space
+			
+ーーーーーーーーーーーーーーー -->
+
+
+
+				<div id="sphere_nav">
+					<div id="sphere_space" class="sphere_space">
+
+
+
+							<div class="sphere sphere1" id="sphere1">
+
+									<ul>
+										<li class="circle1 circle"><span class="textY"><span class="textX"><span class="text ">HTMLについて</span></span></span></li>
+										<li class="circle2 circle"><span class="textY"><span class="textX"><span class="text ">CSSについて</span></span></span></li>
+										<li class="circle3 circle"><span class="textY"><span class="textX"><span class="text ">javascriptについて</span></span></span></li>
+										<li class="circle4 circle"><span class="textY"><span class="textX"><span class="text ">phpについて</span></span></span></li>
+										<li class="circle5 circle"><span class="textY"><span class="textX"><span class="text ">mySQLについて</span></span></span></li>
+										<li class="circle6 circle"><span class="textY"><span class="textX"><span class="text ">仮想マシンについて</span></span></span></li>
+									</ul>
+							</div><!-- sphere1 -->
+							
+	
+	
+							<div class="sphere sphere2" id="sphere2">
+
+									<ul>
+										<li class="circle1 circle"><span class="textY"><span class="textX"><span class="text">エディターについて</span></span></span></li>
+										<li class="circle2 circle"><span class="textY"><span class="textX"><span class="text">失敗をまとめる</span></span></span></li>
+										<li class="circle3 circle"><span class="textY"><span class="textX"><span class="text">アニメーションについて</span></span></span></li>
+										<li class="circle4 circle"><span class="textY"><span class="textX"><span class="text">スマートフォンについて</span></span></span></li>
+										<li class="circle5 circle"><span class="textY"><span class="textX"><span class="text">ちょっとしたテクニック</span></span></span></li>
+										<li class="circle6 circle"><span class="textY"><span class="textX"><span class="text">ちょっとしたテクニック2</span></span></span></li>
+	
+									<!-- 後から追加可能  li class="circle「連番」を振っておくこと" / スフィアからの距離は　sphere.jsで設定し直す必要がある -->
+										<li class="circle7 circle"><span class="textY"><span class="textX"><span class="text">エディターについて</span></span></span></li>
+										<li class="circle8 circle"><span class="textY"><span class="textX"><span class="text">失敗をまとめる</span></span></span></li>
+										<li class="circle9 circle"><span class="textY"><span class="textX"><span class="text">アニメーションについて</span></span></span></li>
+										<li class="circle10 circle"><span class="textY"><span class="textX"><span class="text">スマートフォンについて</span></span></span></li>
+										<li class="circle11 circle"><span class="textY"><span class="textX"><span class="text">ちょっとしたテクニック</span></span></span></li>
+										<li class="circle12 circle"><span class="textY"><span class="textX"><span class="text">ちょっとしたテクニック2</span></span></span></li>
+									</ul>
+							</div><!-- sphere2 -->
+
+
+
+					</div><!-- sphere_space -->
+				</div><!--  sphere_nav -->
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーー 
+	テキストビューア
+ーーーーーーーーーーーーーーー -->
+
+
+
+				<div id="text_viewer" class="none">
+					
+					<div id="text1" class="text_list none">
+						<ul>
+							<li><a href="common/html/text/check.html">HTML5の構文チェック</a></a></li>
+							<li><a href="common/html/text/change_tag.html">HTML5になって意味の変わったタグ</a></li>
+							<li><a href="common/html/text/meta.html">HTML5になって記述が簡単になったメタタグ</a></li>
+							<li><a href="common/html/text/progre.html">プログレッシブエンハンスメント</a></li>
+							<li><a href="common/html/text/section.html">コンテンツモデル／セクショニング</a></li>
+							<li><a href="common/html/text/a_section.html">&lt;h&gt;タグと&lt;section&gt;タグの関係</a></li>
+							<li><a href="common/html/text/quotes.html">クォーテーションの一般的な使い方</a></li>
+						</ul>
+					</div>
+
+					<div id="text2" class="text_list none">
+						<ul>
+							<li><a href="common/html/text/css/base_style.html">よく使うパターン</a></a></li>
+							<li><a href="common/html/text/css/animation_7option.html">animationの7つ目のオプション</a></li>
+							<li><a href="common/html/text/meta.html">HTML5になって記述が簡単になったメタタグ</a></li>
+							<li><a href="common/html/text/progre.html">プログレッシブエンハンスメント</a></li>
+							<li><a href="common/html/text/section.html">コンテンツモデル／セクショニング</a></li>
+							<li><a href="common/html/text/a_section.html">&lt;h&gt;タグと&lt;section&gt;タグの関係</a></li>
+							<li><a href="common/html/text/quotes.html">クォーテーションの一般的な使い方</a></li>
+						</ul>
+					</div>
+
+
+					<!-- ここにファイルを読み込む -->
+					<div id="text_load">
+						<h3>HTMLについてのメモをまとめます</h3>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー 
+　 			3Dのエリア　終わり
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+		</div><!-- memo --><!-- メモであることを示すセクショニング -->
+	</div><!-- stage -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+		wrapper 終わり
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+</div><!--wrapper-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+		フッター　	script 有効時には　非表示
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+
+<div id="footer" class="noscript">
+
+
+
+	<h2>サイトマップ</h2>
+
+	<ul>
+		<li><span>サイトについて&nbsp;:</span>
+			<ul>
+				<li>スライダー</li>
+				<li>いろいろなボタン</li>
+				<li>パネルメニュー</li>
+				<li>リストメニュー</li>
+				<li>ギャラリー</li>
+				<li>3Dスライダー</li>
+				<li>円形レイアウト</li>
+				<li>テンプレート</li>
+				<li>球体を作る</li>
+			</ul>
+		</li>
+
+		<li><span>UI&nbsp;:</span>
+			<ul>
+				<li>スライダー</li>
+				<li>いろいろなボタン</li>
+				<li>パネルメニュー</li>
+				<li>リストメニュー</li>
+				<li>ギャラリー</li>
+				<li>3Dスライダー</li>
+				<li>円形レイアウト</li>
+				<li>テンプレート</li>
+				<li>球体を作る</li>
+			</ul>
+		</li>
+		
+		<li><span>MEMO&nbsp;:</span>
+			<ul>
+				<li>HTMLについて</li>
+				<li>CSSについて</li>
+				<li>javascriptについて</li>
+				<li>phpについて</li>
+				<li>mySQLについて</li>
+				<li>仮想マシンについて</li>
+				<li>エディターについて</li>
+				<li>失敗をまとめる</li>
+				<li>アニメーションについて</li>
+				<li>スマートフォンについて</li>
+				<li>ちょっとしたテクニック</li>
+			</ul>
+		</li>
+	</ul>
+
+
+	
+
+
+</div><!-- footer -->
+
+
+<!-- </div>なんだこれ？ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+		javascript 
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
+
+	<script src="common/js/jquery-1.11.1.min.js"></script>
+	<script src="common/js/-prefix-free.js"></script>
+	<script src="common/js/prefixFree.js"></script>
+	<script src="common/js/css.js"></script>
+	<script src="common/js/stage.js"></script>
+	<script src="common/js/animationCSS.js"></script>
+	<script src="common/js/sphere.js"></script>
+	<script src="common/js/lesponsive.js"></script>
+	<script src="common/js/loadfunction.js"></script>
+
+
+
+	<script>
+	//sphere.js　へ　！
+
+		$('#text_viewer a').click(function(e){
+			var this_url = $(this).attr('href');
+			$('#text_load').load(this_url);
+			e.preventDefault();
+		});
+
+
+	</script>
+
+
+
+<script id="circle">
+
+
+var load_fn7 = function(){
+
+			$(function(){
+		
+
+
+
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+			//必要な値を用意する
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+			//カウント用変数
+			var circle_count = 1;
+
+
+			//要素の数
+			var l = $('#load_wrapper li').length;
+
+
+			//円を要素の数で割った角度
+			var deg = 360/l;
+
+
+			//円の半径
+			var r = 200;
+
+
+			//ステージの取得
+			var stage = $('#stage');
+
+
+			//ステージの 幅 / 高さ を取得
+			var stageWidth = stage.outerWidth();
+			var stageHeight = stage.outerHeight();
+
+
+			//幅をpx指定しても自動で割り出してセンタリングする
+			stage.css({
+				marginLeft:-stageWidth/2,	//ステージの幅から中心を割り出して　基準点をずらす
+				left:'50%'					//基準点をウィンドウの中心に持っていく
+			})
+
+
+
+
+
+
+
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+			//スタート位置をランダムに設定
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+			//要素の数だけ処理 01 ランダムに配置
+			$('#load_wrapper li').each(function(){
+
+
+
+
+					//初期位置のをランダムで取得
+					var posrnd = Math.round(Math.random()*stageWidth*10)/10;
+					var rotrnd = Math.round(Math.random()*360);//?
+
+
+
+					$(this).css({
+
+
+						//stageの範囲内でランダムに配置
+						left:posrnd,
+						bottom:posrnd,
+
+						//最初の大きさ
+						width:'80px',
+						height:'80px',
+
+
+
+
+					});//css
+			});//each
+
+
+
+
+
+
+
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+			//スタート位置をランダムに設定
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+
+
+			//要素の数だけ処理 02 円形に再配置
+			
+			$('#load_wrapper li').each(function(){
+
+
+					$(this).animate({
+
+
+						position:'absolute',
+
+
+
+						// ┌────────────────────────────────────────────────────────────────────┐ \\
+						// │	cosθ は x座標 を示す		//sinθ は y座標 を示す  			        │ \\
+						// ├────────────────────────────────────────────────────────────────────┤ \\
+						// │    π / 180 * deg　は　角度をradian単位に変換している                    │ \\
+						// └────────────────────────────────────────────────────────────────────┘ \\
+						
+
+
+
+						/* x座標 */
+						left: 	r*Math.cos(Math.PI/180*(deg*circle_count))
+								+(stageWidth/2)
+								,
+
+																		//+(stageWidth/2)にすることで円全体を右上にずらす
+
+
+
+
+						/* y座標 */
+						bottom: r*Math.sin(Math.PI/180*(deg*circle_count))
+								+(stageHeight/4)
+								,
+
+																		//r(半径)の数値を変更することで楕円にすることも可能
+
+
+						//アニメーション後の大きさ
+						width:'20px',
+						height:'20px',
+
+
+
+				},2000);//animate
+
+
+
+
+			circle_count++;
+
+			});//each
+				
+
+
+		});//おわり
+
+}
+
+
+// var an1 = function(){alert('an1');}
+// var an2 = function(){alert('an2');}
+
+// var fn = eval('an'+2+'()');
+// fn;
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

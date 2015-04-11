@@ -1,0 +1,86 @@
+IEに対応させるには
+
+preserve-3dがきかないので、空間でラップすることができな
+
+ここにバラバラのスタイルを設定する必要がある
+
+それぞれに対してアニメーションクラスを設定しなければならない
+
+<ul>
+	<li></li>	rotateY(0deg); - rotateY(360deg)
+	<li></li>	rotateY(36deg) - rotateY(396dg)
+	<li></li>	rotateY(72deg) - rotateY(429deg)
+	<li></li>	rotateY(108deg) - rotateY(~~)
+	<li></li>	~ 
+	<li></li>	~
+	<li></li>	~
+	<li></li> 	~
+	<li></li>	~
+	<li></li>	~
+</ul>
+
+
+<script>
+//書くのがめんどくさいので
+
+
+
+//要素の数を取得
+	var l = $(取得する要素).length;
+
+//要素の数で 円の角度 360 を　割る
+	var theta = 360/l;
+
+//ついでにdurationの設定を変数で指定して管理しやすくする
+	var effect_time = 1;
+
+for(i=0; i<l; i++){
+	$('head').appned("
+	<style id="+effect_animate+">
+		.effect_animate"+i+"{
+			animation:effect_animate"+i+" "+effect_time+"s ease;
+			@keyframes effect_animate{
+				0%{transform:rotateY("+theta*i+");}
+				100%{transform:rotateY("+(360+(theta*i))+");}
+			}
+		}
+	</style>
+
+	");
+}
+
+
+//これでもいけるが、何回も head をセレクトして　書き加える処理を何回も繰り返すので無駄がある
+//こうすればかるくなるのでは？
+
+
+
+
+	
+
+	<style id="+effect_animate+">
+
+
+for(i=0; i<l; i++){
+
+	var style_text = 
+
+		".effect_animate"+i+"{
+			animation:effect_animate"+i+" "+effect_time+"s ease;
+			@keyframes effect_animate{
+				0%{transform:rotateY("+theta*i+");}
+				100%{transform:rotateY("+(360+(theta*i))+");}
+			}
+		}";
+
+
+
+	</style>
+
+
+}
+
+
+
+
+</script>

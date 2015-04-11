@@ -1,0 +1,32 @@
+/*-----------------
+	非表示
+/*-----------------*/
+
+.none{
+	display:none !important;
+}
+.hidden{
+	visibility: hidden;
+}
+
+
+
+
+
+/*-----------------
+	背景
+/*-----------------*/
+
+.b_black_a{
+	background:rgba(0,0,0,0.6);
+}
+.b_white_a{
+	background:rgba(0,0,0,0.8);
+}
+
+.b_white{
+	background:#eee;
+}
+.b_black{
+	background:#333;
+}

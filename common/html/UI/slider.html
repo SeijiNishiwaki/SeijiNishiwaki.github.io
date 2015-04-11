@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>myUI</title>
+	<link rel="stylesheet" href="mySlider01Gide.css">
+	<link rel="stylesheet" href="mySlider01Contents.css">
+
+	<style type="text/css">
+body{
+	margin: 0;
+	padding: 0;
+	height:100%;
+}
+/*.embox{
+	position: absolute;
+	border: 1px solid;	
+	width: 45em;
+	height: 35em;		
+}*/
+
+/*ーーーーーーーーーーーーーーーーーーーーーーーーーーーーースライダー*/
+#load_wrapper #slider{
+	position:absolute;
+	border: 0px solid;
+	width:100%;
+	height:100%;		/* outernav　の位置基準になっている いい方法あるか？*/
+}						/* areaのすぐ下に配置したい*/
+						/*現状heightはいじらない　outernavの値で調整*/
+/*ーーーーーーーーーーーーーーーーーコンテンツエリア*/
+/*枠の設定*/
+#load_wrapper #area{
+	position: absolute;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	width:100%;
+	height:100%;
+	position: absolute;
+}
+/*-------------------------------------------------------indicator-----*/
+	.indicator{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+/*-------------------------------------------------------indicator-----*/
+
+/*ーーーーーーーーーーーーーーーーーナビゲーション*/
+/*ナビゲーション共通項目*/
+#load_wrapper .nav{
+	border:30px solid ;
+	font-size: 0;
+	border-color: transparent;	
+}
+/*ーーーーーーーーーインナーナビゲーション*/
+#load_wrapper .innernav{
+	position: absolute;
+	top: 45%;
+	margin-top: -15px;
+}
+/*　ーーーーー各設定　*/
+#load_wrapper #innerprev{
+	border-right-color: #333;
+	left: 0;
+}
+
+#load_wrapper #innernext{
+	border-left-color: #333;
+	right: 0;
+}
+/*ーーーーーーーーーアウターナビゲーション*/
+#load_wrapper .outernav{
+	position:absolute;
+	bottom:0%;
+	
+}
+/*　ーーーーー各設定　*/
+#load_wrapper #outerprev{
+	border-right-color: #afa;
+	left: 5em;
+}
+
+#load_wrapper #outernext{
+	border-left-color: #afa;
+	right: 5em;
+}
+/*　プレブ　のデフォルトを　不可視　にする*/
+#load_wrapper .prev{
+	display:none;
+}
+
+
+	
+#load_wrapper #area{
+	overflow: hidden;					/*　隠す設定　*/
+}
+#load_wrapper #width{
+	width: 500%;
+	height: 100%;
+}
+#load_wrapper .contents{
+	background: rgba(100,100,100,0.7);	
+	width: 10%;
+	margin-left: 5%;
+	margin-right: 5%;
+	height:100%;
+	float: left;
+}
+#load_wrapper #content1{
+	background:rgba(255,255,0,0.7);
+}
+#load_wrapper #content2{
+	background:rgba(255,0,255,0.7);
+}
+#load_wrapper #content3{
+	background:rgba(0,255,255,0.7);
+}
+#load_wrapper #content4{
+	background:rgba(255,0,0,0.7);
+}
+#load_wrapper #content5{
+	background:rgba(0,255,0,0.7);
+}
+
+
+
+	</style>
+</head>
+<body>
+
+
+
+
+
+
+	<div id="load_wrapper">
+
+
+<div id="page_title">
+	<h2>The_Slider</h2>
+<div>クリックカウンター: <span class="click">0</span></div>
+
+</div>
+
+		<div id="load_stage">
+			<div id="slider">
+			
+				<div id="area">
+			
+					
+			
+					<div id="innerprev" class="nav innernav prev button"></div>
+					<div id="innernext" class="nav innernav next button"></div>
+			
+					<div id="width">
+						<div id="content1" class="contents">1</div>
+						<div id="content2" class="contents">2</div>
+						<div id="content3" class="contents">3</div>
+						<div id="content4" class="contents">4</div>
+						<div id="content5" class="contents">5</div>
+					</div>
+				</div>
+			
+				<div id="outerprev" class="nav outernav prev button"></div>
+				<div id="outernext" class="nav outernav next button"></div>
+			
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+<script>
+
+$(function(){
+
+
+
+
+
+
+//カウンター
+var i = 0;
+
+//コンテンツの数＋１
+var page = (i+5)%5;
+
+
+
+
+
+
+
+
+/*---------------------------------------*
+	//次ページへ　の
+/*---------------------------------------*/
+	$('.button').click(function(){ $('.click').text(page); });
+
+	$('#innernext').click(function(){
+		
+		i++;
+		var page = (i+5)%5	/*コンテンツの数*/
+		$('.click').text(page);
+		switch(i){
+			case 0:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-000%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 1:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-100%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 2:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-200%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 3:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-300%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 4:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-400%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;   
+		};
+		$('.prev').show();
+		if(i == 4){ $('.next').hide();};
+	}); /* ー/インナーネクスト/　ークリックファンクションーーーーーーーーーーー*/
+
+	/* ーインナープレブーーーーーーー　クリックファンクション　ーーーーーーーーー*/
+	$('#innerprev').click(function(){
+		
+		i--;
+		var page = (i+5)%5	/*コンテンツの数＋１*/
+		$('.click').text(page);
+		switch(i){
+			case 0:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'000%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 1:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-100%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 2:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-200%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 3:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-300%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;
+			case 4:
+			/*スイッチにコピペ--------------------------*/
+							/*　cssの変更 */
+		$('#width').animate({marginLeft:'-400%'}
+							/*　animateオプション　*/
+							,{duration:500});
+		/*ーーーーーーーーーーーーーーーーーーーーーーー*/
+
+			 break;   
+		};
+		$('.next').show();
+		if(i == 0){ $('.prev').hide();};
+	}); /* ーインナープレブー　ークリックファンクションーーーーーーーーーーー*/
+
+	/*　アウターネクスト　歳後まで飛ぶ　ーーーーーーーーーーーーーーーーーーー*/
+	$('#outernext').click(function(){
+		$('#width').animate({ marginLeft:'-400%' });
+		i = 4;
+		$('.prev').show();
+		if(i == 4){ $('.next').hide();};
+	}); 
+	/*　/アウターネクスト/　歳後まで飛ぶ　ーーーーーーーーーーーー*/
+	/*　アウタープレヴ　ーーーーーーーーーーーーーーーーーーーーー*/
+	$('#outerprev').click(function(){
+		$('#width').animate({marginLeft:'0%'});
+		i = 0;
+		$('.next').show();
+		if(i == 0){ $('.prev').hide();};
+	});
+	/*　アウタープレヴ　------------------------------------*/
+
+});
+
+</script>
+
+</body>
+</html>
